@@ -1,4 +1,3 @@
-// Kelas SensorPasut dengan tambahan metode dan properti baru
 class SensorPasut {
     constructor(nama, lokasi) {
         this.nama = nama;
@@ -16,32 +15,36 @@ class SensorPasut {
         this._status = "Nonaktif";
         return `Sensor ${this.nama} di ${this.lokasi} telah dinonaktifkan/dimatikan.`;
     }
-
+    
     getStatus() {
         return `Status Sensor ${this.nama} di ${this.lokasi} sedang ${this._status}.`;
     }
 
-    cekLatihanKapal() {
-        return `Latihan kapal sedang berlangsung di sekitar lokasi sensor ${this.nama}.`;
-    }
-
-    cekKondisiCuaca(cuaca) {
-        return `Kondisi cuaca di ${this.lokasi} adalah ${cuaca}.`;
-    }
-
-    // Metode baru 1: cekBaterai
     cekBaterai() {
         return `Kapasitas baterai sensor ${this.nama} adalah ${this._baterai}%.`;
     }
 
-    // Metode baru 2: kalibrasi
     kalibrasi() {
-        this._baterai -= 5; // Mengurangi kapasitas baterai karena kalibrasi
+        this._baterai -= 5;
         return `Sensor ${this.nama} di ${this.lokasi} telah dikalibrasi. Baterai tersisa: ${this._baterai}%.`;
     }
 }
 
-// Kelas Kapal dengan penambahan properti dan metode baru
+// Kelas SensorSuhu yang meng-extend SensorPasut
+class SensorSuhu extends SensorPasut {
+    cekSuhu() {
+        return `Suhu di lokasi sensor ${this.nama} adalah 28°C.`;
+    }
+}
+
+// Kelas SensorKelembaban yang meng-extend SensorPasut
+class SensorKelembaban extends SensorPasut {
+    cekKelembaban() {
+        return `Kelembaban di lokasi sensor ${this.nama} adalah 60%.`;
+    }
+}
+
+// Kelas Kapal
 class Kapal {
     constructor(nama, jenis, kapasitas, panjang, lebar, kecepatan = 0) {
         this.nama = nama;
@@ -49,28 +52,50 @@ class Kapal {
         this.kapasitas = kapasitas;
         this.panjang = panjang;
         this.lebar = lebar;
-        this.kecepatan = kecepatan; // Kecepatan dalam km/jam
-        this.operasional = false; // Status operasional kapal
+        this.kecepatan = kecepatan;
+        this.operasional = false;
     }
 
     infoKapal() {
         return `Kapal ${this.nama} berjenis ${this.jenis} dengan kapasitas ${this.kapasitas} orang, memiliki panjang ${this.panjang} meter dan lebar ${this.lebar} meter.`;
     }
 
-    // Metode baru 1: ubahKecepatan
     ubahKecepatan(kecepatanBaru) {
         this.kecepatan = kecepatanBaru;
         return `Kecepatan kapal ${this.nama} sekarang adalah ${this.kecepatan} km/jam.`;
     }
 
-    // Metode baru 2: statusOperasional
     statusOperasional() {
-        this.operasional = !this.operasional; // Ubah status operasional
+        this.operasional = !this.operasional;
         return `Kapal ${this.nama} sekarang ${this.operasional ? "sedang beroperasi" : "tidak beroperasi"}.`;
     }
 }
 
-// Kelas InfoTiket yang meng-extend Kapal
+// Kelas KapalPenumpang yang meng-extend Kapal
+class KapalPenumpang extends Kapal {
+    constructor(nama, kapasitas, panjang, lebar, jumlahDeck) {
+        super(nama, "Penumpang", kapasitas, panjang, lebar);
+        this.jumlahDeck = jumlahDeck;
+    }
+
+    infoKapal() {
+        return `Kapal Penumpang ${this.nama} memiliki ${this.jumlahDeck} deck dengan kapasitas ${this.kapasitas} penumpang.`;
+    }
+}
+
+// Kelas KapalKargo yang meng-extend Kapal
+class KapalKargo extends Kapal {
+    constructor(nama, kapasitas, panjang, lebar, tonase) {
+        super(nama, "Kargo", kapasitas, panjang, lebar);
+        this.tonase = tonase;
+    }
+
+    infoKapal() {
+        return `Kapal Kargo ${this.nama} memiliki kapasitas muatan ${this.tonase} ton dan panjang ${this.panjang} meter.`;
+    }
+}
+
+// Polimorfisme melalui kelas InfoTiket yang juga meng-extend Kapal
 class InfoTiket extends Kapal {
     constructor(nama, jenis, kapasitas, panjang, lebar, jumlahTiket) {
         super(nama, jenis, kapasitas, panjang, lebar);
@@ -91,15 +116,31 @@ class InfoTiket extends Kapal {
     }
 }
 
-// Contoh penggunaan
-let sensorMerak = new SensorPasut("Selat Sunda", "Merak");
-console.log(sensorMerak.aktifkan());
-console.log(sensorMerak.cekBaterai());
-console.log(sensorMerak.kalibrasi());
+// Polimorfisme di sini
+let sensorArray = [
+    new SensorPasut("Selat Sunda", "Merak"),
+    new SensorSuhu("Teluk Jakarta", "Jakarta"),
+    new SensorKelembaban("Pantai Kuta", "Bali")
+];
 
-let ferryKapal = new InfoTiket("Ferry Express", "Penumpang", 500, 100, 30, 200);
-console.log(ferryKapal.infoKapal());
-console.log(ferryKapal.ubahKecepatan(25));
-console.log(ferryKapal.statusOperasional());
-console.log(ferryKapal.cekTiketTersedia());
-console.log(ferryKapal.beliTiket(50));
+sensorArray.forEach(sensor => {
+    console.log(sensor.aktifkan());
+    console.log(sensor.cekBaterai());
+    if (sensor instanceof SensorSuhu) {
+        console.log(sensor.cekSuhu());
+    } else if (sensor instanceof SensorKelembaban) {
+        console.log(sensor.cekKelembaban());
+    }
+});
+
+let kapalArray = [
+    new KapalPenumpang("Ferry Express", 500, 100, 30, 3),
+    new KapalKargo("Logistics King", 20, 200, 40, 10000),
+    new InfoTiket("Sea Cruiser", "Penumpang", 200, 150, 20, 100)
+];
+
+kapalArray.forEach(kapal => {
+    console.log(kapal.infoKapal());
+    console.log(kapal.ubahKecepatan(40));
+    console.log(kapal.statusOperasional());
+});
