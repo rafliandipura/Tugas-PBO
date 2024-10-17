@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Node JS - MySQL</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn {
+            width: auto;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        form {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Daftar User/Pengguna</h1>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(pengguna => { %>
+                <tr>
+                    <td><%= pengguna.id %></td>
+                    <td><%= pengguna.name %></td>
+                    <td><%= pengguna.email %></td>
+                    <td><%= pengguna.phone %></td>
+                    <td>
+                        <a href="/edit/<%= pengguna.id %>" class="btn btn-info btn-sm" onclick="return showAlert('edit', '<%= pengguna.name %>')">Edit</a>
+                        <a href="/delete/<%= pengguna.id %>" class="btn btn-danger btn-sm" onclick="return confirmDelete('<%= pengguna.name %>', '<%= pengguna.id %>')">Hapus</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <h2>Tambah Pengguna Baru</h2>
+        <form action="/add" method="POST" onsubmit="return confirmAdd();">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+            <label for="phone">Telepon:</label>
+            <input type="text" name="phone" id="phone" required>
+            <button type="submit" class="btn btn-success">Tambah</button>
+        </form>
+
+        <a href="/" class="back-link">Kembali ke Daftar Pengguna</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showAlert(action, name) {
+            alert(`Anda akan ${action} pengguna: ${name}`);
+            return true; // Allow the action to proceed
+        }
+
+        function confirmDelete(name, id) {
+            return confirm(`Apakah Anda yakin ingin menghapus pengguna: ${name}?`);
+        }
+
+        function confirmAdd() {
+            return confirm('Apakah Anda yakin ingin menambah pengguna ini?');
+        }
+    </script>
+</body>
+</html>
