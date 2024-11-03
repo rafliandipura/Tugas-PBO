@@ -1,0 +1,59 @@
+<!-- views/landing.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing Page</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/images/stadium-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #f7d20e; /* Gold color */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Link styles */
+        a {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #ffffff;
+            margin: 0 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #00529f; /* Real Madrid blue */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        /* Hover and focus effects for links */
+        a:hover, a:focus {
+            background-color: #f7d20e; /* Gold on hover */
+            color: #00529f;
+            transform: translateY(-3px);
+        }
+
+        a:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Real Madrid Fan Page</h1>
+    <a href="/login">Login</a> | <a href="/register">Register</a>
+</body>
+</html>

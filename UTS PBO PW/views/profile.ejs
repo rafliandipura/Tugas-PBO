@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/images/stadium-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1, h2 {
+            color: #f7d20e;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .card {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        a {
+            color: #f7d20e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .submit-button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #f7d20e;
+            border: none;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, <%= user.username %>!</h1>
+    <p>This is your profile page.</p>
+
+    <!-- Coach Section -->
+    <div class="card">
+        <h2>Coach</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Country</th>
+                    <th>Birth Date</th>
+                    <th>Experience</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (coach) { %>
+                    <tr>
+                        <td><%= coach.nama_pelatih %></td>
+                        <td><%= coach.posisi %></td>
+                        <td><%= coach.negara %></td>
+                        <td><%= coach.tanggal_lahir ? coach.tanggal_lahir.toDateString() : 'N/A' %></td>
+                        <td><%= coach.pengalaman_tahun %></td>
+                    </tr>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5">No coach information found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Players Section -->
+    <div class="card">
+        <h2>Players</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Number</th>
+                    <th>Country</th>
+                    <th>Birth Date</th>
+                    <th>Height (cm)</th>
+                    <th>Weight (kg)</th>
+                    <th>Year Joined</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (players.length > 0) { %>
+                    <% players.forEach(player => { %>
+                        <tr>
+                            <td><%= player.nama_pemain %></td>
+                            <td><%= player.posisi %></td>
+                            <td><%= player.nomor_punggung %></td>
+                            <td><%= player.negara %></td>
+                            <td><%= player.tanggal_lahir ? player.tanggal_lahir.toDateString() : 'N/A' %></td>
+                            <td><%= player.tinggi_cm %></td>
+                            <td><%= player.berat_kg %></td>
+                            <td><%= player.bergabung_tahun %></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="8">No players found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Team Statistics Section -->
+    <div class="card">
+        <h2>Team Statistics</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Season</th>
+                    <th>Matches</th>
+                    <th>Wins</th>
+                    <th>Draws</th>
+                    <th>Losses</th>
+                    <th>Goals Scored</th>
+                    <th>Goals Conceded</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (statistics.length > 0) { %>
+                    <% statistics.forEach(stat => { %>
+                        <tr>
+                            <td><%= stat.musim %></td>
+                            <td><%= stat.total_pertandingan %></td>
+                            <td><%= stat.kemenangan %></td>
+                            <td><%= stat.seri %></td>
+                            <td><%= stat.kekalahan %></td>
+                            <td><%= stat.gol_mencetak %></td>
+                            <td><%= stat.gol_kebobolan %></td>
+                            <td><%= stat.poin %></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="8">No statistics found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Trophies Section -->
+    <div class="card">
+        <h2>Trophies</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Season</th>
+                    <th>Count</th>
+                    <th>Coach ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (trophies.length > 0) { %>
+                    <% trophies.forEach(trophy => { %>
+                        <tr>
+                            <td><%= trophy.nama_trofi %></td>
+                            <td><%= trophy.musim %></td>
+                            <td><%= trophy.jumlah_trofi %></td>
+                            <td><%= trophy.pelatih_id %></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">No trophies found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="/logout">Logout</a>
+</body>
+</html>
