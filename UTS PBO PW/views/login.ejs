@@ -1,98 +1,115 @@
-<!-- views/login.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background: url('/images/stadium-background.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #ffffff;
+        /* General Reset */
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
-        h1 {
-            font-size: 2.5em;
-            color: #f7d20e; /* Gold color */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        /* Background Styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            background: url('https://e1.pxfuel.com/desktop-wallpaper/210/483/desktop-wallpaper-field-the-sky-grass-night-lights-lawn-football-uniform-tribune-stadium-athletes-floodlight-players-section-%D1%81%D0%BF%D0%BE%D1%80%D1%82-football-players-on-the-field.jpg') no-repeat center center/cover; /* Consistent background */
+        }
+
+        /* Container for Login Form */
+        .form-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); /* Neon green shadow */
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fade-in 1.5s ease-in-out;
+        }
+
+        .form-container h2 {
+            font-size: 2rem;
+            color: #00ff00; /* Neon green */
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; /* Neon effect */
             margin-bottom: 20px;
         }
 
-        /* Form Styles */
-        form {
-            background-color: rgba(0, 0, 0, 0.6); /* Dark translucent background */
-            padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            width: 300px;
-        }
-
-        input[type="text"], input[type="password"] {
+        /* Input Fields */
+        .form-container input[type="text"],
+        .form-container input[type="password"],
+        .form-container input[type="email"] {
+            width: 100%;
             padding: 10px;
             margin: 10px 0;
-            font-size: 1em;
             border: none;
             border-radius: 5px;
-            outline: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            background: #000; /* Black background for inputs */
+            color: #00ff00; /* Neon green text */
+            font-size: 1rem;
+            box-shadow: inset 0 0 5px #00ff00; /* Inner neon effect */
         }
 
-        /* Button Styles */
-        button {
+        /* Submit Button */
+        .form-container button {
+            width: 100%;
             padding: 10px;
-            font-size: 1.2em;
-            color: #ffffff;
-            background-color: #00529f; /* Real Madrid blue */
+            font-size: 1.2rem;
+            color: #000; /* Black text */
+            background: #ffff00; /* Neon yellow */
             border: none;
             border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00; /* Neon effect */
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px #ffff00, 0 0 20px #00ff00; /* Yellow and green shadows */
         }
 
-        button:hover {
-            background-color: #f7d20e; /* Gold on hover */
-            color: #00529f;
-            transform: translateY(-3px);
+        .form-container button:hover {
+            background: #00ff00; /* Neon green on hover */
+            color: #000; /* Black text on hover */
+            box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00; /* Enhanced green glow on hover */
+            transform: scale(1.05);
         }
 
-        button:active {
-            transform: translateY(1px);
-        }
-
-        /* Link Styles */
-        a {
-            color: #f7d20e; /* Gold color */
+        /* Text Links */
+        .form-container a {
+            color: #ffd700; /* Gold color */
             text-decoration: none;
-            margin-top: 15px;
-            font-size: 1em;
-            transition: color 0.3s;
+            display: block;
+            margin-top: 10px;
+            transition: color 0.3s ease;
         }
 
-        a:hover {
-            color: #ffffff;
+        .form-container a:hover {
+            color: #ffff00; /* Neon yellow on hover */
+        }
+
+        /* Fade-in Animation */
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
-    <a href="/register">Don't have an account? Register here</a>
+    <div class="form-container">
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" name="email" required><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" name="password" required><br>
+            
+            <button type="submit">Login</button>
+        </form>
+        <a href="/register">Don't have an account? Register here</a>
+    </div>
 </body>
 </html>
