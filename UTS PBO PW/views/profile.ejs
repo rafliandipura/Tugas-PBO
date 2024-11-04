@@ -2,201 +2,326 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title>Profile - Management Club</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: url('/images/stadium-background.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #ffffff;
+        /* General Reset */
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background-color: #2b7a3d;
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        h1, h2 {
-            color: #f7d20e;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        }
-
-        .card {
-            background-color: rgba(0, 0, 0, 0.6);
+            background: url('https://images.unsplash.com/photo-1605002713581-123e77bcf83d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
             padding: 20px;
-            border-radius: 10px;
-            margin: 10px;
-            width: 80%;
+        }
+
+        /* Header Styling */
+        h1, h2 {
+            color: #ffd700;
+            text-shadow: 0 0 5px #ffd700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 40px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            max-width: 900px;
+            margin: 20px 0;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #1e5e2d;
+            color: #fff;
+        }
+
+        /* Form Styling */
+        .crud-form {
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            color: #fff;
             max-width: 600px;
+            width: 100%;
         }
 
-        a {
-            color: #f7d20e;
-            text-decoration: none;
-            font-weight: bold;
+        .crud-form label {
+            display: block;
+            margin: 10px 0 5px;
         }
 
-        .submit-button {
-            margin-top: 10px;
-            padding: 8px 16px;
-            background-color: #f7d20e;
-            border: none;
+        .crud-form input, .crud-form button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
             border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .crud-form button {
+            background-color: #00e6e6;
             color: #000;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background 0.3s ease;
         }
 
-        .submit-button:hover {
-            background-color: #ffc107;
+        .crud-form button:hover {
+            background-color: #000;
+            color: #00e6e6;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome, <%= user.username %>!</h1>
-    <p>This is your profile page.</p>
+    <h1>Management Club</h1>
 
-    <!-- Coach Section -->
-    <div class="card">
-        <h2>Coach</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Country</th>
-                    <th>Birth Date</th>
-                    <th>Experience</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if (coach) { %>
-                    <tr>
-                        <td><%= coach.nama_pelatih %></td>
-                        <td><%= coach.posisi %></td>
-                        <td><%= coach.negara %></td>
-                        <td><%= coach.tanggal_lahir ? coach.tanggal_lahir.toDateString() : 'N/A' %></td>
-                        <td><%= coach.pengalaman_tahun %></td>
-                    </tr>
-                <% } else { %>
-                    <tr>
-                        <td colspan="5">No coach information found.</td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
+    <!-- Daftar Pemain -->
+    <h2>Daftar Pemain</h2>
+    <table>
+        <tr>
+            <th>ID Pemain</th>
+            <th>Nama Pemain</th>
+            <th>Posisi</th>
+            <th>Nomor Punggung</th>
+            <th>Negara</th>
+            <th>Tanggal Lahir</th>
+            <th>Tinggi (cm)</th>
+            <th>Berat (kg)</th>
+            <th>Bergabung Tahun</th>
+            <th>Actions</th>
+        </tr>
+        <% pemain.forEach(player => { %>
+            <tr>
+                <td><%= player.id_pemain %></td>
+                <td><%= player.nama_pemain %></td>
+                <td><%= player.posisi %></td>
+                <td><%= player.nomor_punggung %></td>
+                <td><%= player.negara %></td>
+                <td><%= player.tanggal_lahir %></td>
+                <td><%= player.tinggi %></td>
+                <td><%= player.berat %></td>
+                <td><%= player.bergabung_tahun %></td>
+                <td>
+                    <form action="/players/update/<%= player.id_pemain %>" method="POST" style="display:inline;">
+                        <button type="submit">Update</button>
+                    </form>
+                    <form action="/players/delete/<%= player.id_pemain %>" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <!-- Add Player Form -->
+    <div class="crud-form">
+        <h3>Tambah Pemain Baru</h3>
+        <form action="/players/add" method="POST">
+            <label for="nama_pemain">Nama Pemain:</label>
+            <input type="text" name="nama_pemain" required>
+            <label for="posisi">Posisi:</label>
+            <input type="text" name="posisi" required>
+            <label for="nomor_punggung">Nomor Punggung:</label>
+            <input type="number" name="nomor_punggung" required>
+            <label for="negara">Negara:</label>
+            <input type="text" name="negara" required>
+            <label for="tanggal_lahir">Tanggal Lahir:</label>
+            <input type="date" name="tanggal_lahir" required>
+            <label for="tinggi">Tinggi (cm):</label>
+            <input type="number" name="tinggi" required>
+            <label for="berat">Berat (kg):</label>
+            <input type="number" name="berat" required>
+            <label for="bergabung_tahun">Bergabung Tahun:</label>
+            <input type="number" name="bergabung_tahun" required>
+            <button type="submit">Tambah Pemain</button>
+        </form>
     </div>
 
-    <!-- Players Section -->
-    <div class="card">
-        <h2>Players</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Number</th>
-                    <th>Country</th>
-                    <th>Birth Date</th>
-                    <th>Height (cm)</th>
-                    <th>Weight (kg)</th>
-                    <th>Year Joined</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if (players.length > 0) { %>
-                    <% players.forEach(player => { %>
-                        <tr>
-                            <td><%= player.nama_pemain %></td>
-                            <td><%= player.posisi %></td>
-                            <td><%= player.nomor_punggung %></td>
-                            <td><%= player.negara %></td>
-                            <td><%= player.tanggal_lahir ? player.tanggal_lahir.toDateString() : 'N/A' %></td>
-                            <td><%= player.tinggi_cm %></td>
-                            <td><%= player.berat_kg %></td>
-                            <td><%= player.bergabung_tahun %></td>
-                        </tr>
-                    <% }) %>
-                <% } else { %>
-                    <tr>
-                        <td colspan="8">No players found.</td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
+    <!-- Daftar Pelatih -->
+    <h2>Daftar Pelatih</h2>
+    <table>
+        <tr>
+            <th>ID Pelatih</th>
+            <th>Nama Pelatih</th>
+            <th>Posisi</th>
+            <th>Negara</th>
+            <th>Tanggal Lahir</th>
+            <th>Pengalaman Tahun</th>
+            <th>Actions</th>
+        </tr>
+        <% pelatih.forEach(coach => { %>
+            <tr>
+                <td><%= coach.id_pelatih %></td>
+                <td><%= coach.nama_pelatih %></td>
+                <td><%= coach.posisi %></td>
+                <td><%= coach.negara %></td>
+                <td><%= coach.tanggal_lahir %></td>
+                <td><%= coach.pengalaman_tahun %></td>
+                <td>
+                    <form action="/coaches/update/<%= coach.id_pelatih %>" method="POST" style="display:inline;">
+                        <button type="submit">Update</button>
+                    </form>
+                    <form action="/coaches/delete/<%= coach.id_pelatih %>" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <!-- Add Coach Form -->
+    <div class="crud-form">
+        <h3>Tambah Pelatih Baru</h3>
+        <form action="/coaches/add" method="POST">
+            <label for="nama_pelatih">Nama Pelatih:</label>
+            <input type="text" name="nama_pelatih" required>
+            <label for="posisi">Posisi:</label>
+            <input type="text" name="posisi" required>
+            <label for="negara">Negara:</label>
+            <input type="text" name="negara" required>
+            <label for="tanggal_lahir">Tanggal Lahir:</label>
+            <input type="date" name="tanggal_lahir" required>
+            <label for="pengalaman_tahun">Pengalaman Tahun:</label>
+            <input type="number" name="pengalaman_tahun" required>
+            <button type="submit">Tambah Pelatih</button>
+        </form>
     </div>
 
-    <!-- Team Statistics Section -->
-    <div class="card">
-        <h2>Team Statistics</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Season</th>
-                    <th>Matches</th>
-                    <th>Wins</th>
-                    <th>Draws</th>
-                    <th>Losses</th>
-                    <th>Goals Scored</th>
-                    <th>Goals Conceded</th>
-                    <th>Points</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if (statistics.length > 0) { %>
-                    <% statistics.forEach(stat => { %>
-                        <tr>
-                            <td><%= stat.musim %></td>
-                            <td><%= stat.total_pertandingan %></td>
-                            <td><%= stat.kemenangan %></td>
-                            <td><%= stat.seri %></td>
-                            <td><%= stat.kekalahan %></td>
-                            <td><%= stat.gol_mencetak %></td>
-                            <td><%= stat.gol_kebobolan %></td>
-                            <td><%= stat.poin %></td>
-                        </tr>
-                    <% }) %>
-                <% } else { %>
-                    <tr>
-                        <td colspan="8">No statistics found.</td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
+    <!-- Daftar Statistik Tim -->
+    <h2>Statistik Tim</h2>
+    <table>
+        <tr>
+            <th>ID Statistik</th>
+            <th>Musim</th>
+            <th>Total Pertandingan</th>
+            <th>Kemenangan</th>
+            <th>Seri</th>
+            <th>Kekalahan</th>
+            <th>Gol Mencetak</th>
+            <th>Gol Kebobolan</th>
+            <th>Poin</th>
+            <th>Actions</th>
+        </tr>
+        <% statistik.forEach(stat => { %>
+            <tr>
+                <td><%= stat.id_statistik %></td>
+                <td><%= stat.musim %></td>
+                <td><%= stat.total_pertandingan %></td>
+                <td><%= stat.kemenangan %></td>
+                <td><%= stat.seri %></td>
+                <td><%= stat.kekalahan %></td>
+                <td><%= stat.gol_mencetak %></td>
+                <td><%= stat.gol_kebobolan %></td>
+                <td><%= stat.poin %></td>
+                <td>
+                    <form action="/stats/update/<%= stat.id_statistik %>" method="POST" style="display:inline;">
+                        <button type="submit">Update</button>
+                    </form>
+                    <form action="/stats/delete/<%= stat.id_statistik %>" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <!-- Add Team Statistics Form -->
+    <div class="crud-form">
+        <h3>Tambah Statistik Baru</h3>
+        <form action="/stats/add" method="POST">
+            <label for="musim">Musim:</label>
+            <input type="text" name="musim" required>
+            <label for="total_pertandingan">Total Pertandingan:</label>
+            <input type="number" name="total_pertandingan" required>
+            <label for="kemenangan">Kemenangan:</label>
+            <input type="number" name="kemenangan" required>
+            <label for="seri">Seri:</label>
+            <input type="number" name="seri" required>
+            <label for="kekalahan">Kekalahan:</label>
+            <input type="number" name="kekalahan" required>
+            <label for="gol_mencetak">Gol Mencetak:</label>
+            <input type="number" name="gol_mencetak" required>
+            <label for="gol_kebobolan">Gol Kebobolan:</label>
+            <input type="number" name="gol_kebobolan" required>
+            <label for="poin">Poin:</label>
+            <input type="number" name="poin" required>
+            <button type="submit">Tambah Statistik</button>
+        </form>
     </div>
 
-    <!-- Trophies Section -->
-    <div class="card">
-        <h2>Trophies</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Season</th>
-                    <th>Count</th>
-                    <th>Coach ID</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if (trophies.length > 0) { %>
-                    <% trophies.forEach(trophy => { %>
-                        <tr>
-                            <td><%= trophy.nama_trofi %></td>
-                            <td><%= trophy.musim %></td>
-                            <td><%= trophy.jumlah_trofi %></td>
-                            <td><%= trophy.pelatih_id %></td>
-                        </tr>
-                    <% }) %>
-                <% } else { %>
-                    <tr>
-                        <td colspan="4">No trophies found.</td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
+    <!-- Daftar Piala -->
+    <h2>Daftar Piala</h2>
+    <table>
+        <tr>
+            <th>ID Piala</th>
+            <th>Nama Piala</th>
+            <th>Tahun Menang</th>
+            <th>Lokasi Final</th>
+            <th>Score Akhir</th>
+            <th>Actions</th>
+        </tr>
+        <% trofi.forEach(trophy => { %>
+            <tr>
+                <td><%= trophy.id_piala %></td>
+                <td><%= trophy.nama_piala %></td>
+                <td><%= trophy.tahun_menang %></td>
+                <td><%= trophy.lokasi_final %></td>
+                <td><%= trophy.score_akhir %></td>
+                <td>
+                    <form action="/trophies/update/<%= trophy.id_piala %>" method="POST" style="display:inline;">
+                        <button type="submit">Update</button>
+                    </form>
+                    <form action="/trophies/delete/<%= trophy.id_piala %>" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <!-- Add Trophy Form -->
+    <div class="crud-form">
+        <h3>Tambah Piala Baru</h3>
+        <form action="/trophies/add" method="POST">
+            <label for="nama_piala">Nama Piala:</label>
+            <input type="text" name="nama_piala" required>
+            <label for="tahun_menang">Tahun Menang:</label>
+            <input type="number" name="tahun_menang" required>
+            <label for="lokasi_final">Lokasi Final:</label>
+            <input type="text" name="lokasi_final" required>
+            <label for="score_akhir">Score Akhir:</label>
+            <input type="text" name="score_akhir" required>
+            <button type="submit">Tambah Piala</button>
+        </form>
     </div>
 
-    <a href="/logout">Logout</a>
 </body>
 </html>
