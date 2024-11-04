@@ -8,7 +8,7 @@ const db = require('./db');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware configuration
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'css')));
 app.use(session({
@@ -17,25 +17,23 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// Set EJS as templating engine
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Use authentication routes
+
 app.use('/', authRoutes);
 
-// Landing page route
 app.get('/', (req, res) => {
     res.render('landing');
 });
 
-// Profile page route
+
 app.get('/profile', (req, res) => {
     if (!req.session.user) {
         return res.redirect('/login');
     }
     
-    // Fetch data related to players, coaches, and statistics
     db.query('SELECT * FROM pemain', (err, pemain) => {
         if (err) return res.status(500).send('Error fetching player data.');
 
@@ -55,7 +53,7 @@ app.get('/profile', (req, res) => {
     });
 });
 
-// Route for displaying players
+
 app.get('/pemain', (req, res) => {
     db.query('SELECT * FROM pemain', (err, results) => {
         if (err) return res.status(500).json({ error: 'Database error' });
@@ -63,7 +61,7 @@ app.get('/pemain', (req, res) => {
     });
 });
 
-// Route for displaying coaches
+
 app.get('/pelatih', (req, res) => {
     db.query('SELECT * FROM pelatih', (err, results) => {
         if (err) return res.status(500).json({ error: 'Database error' });
@@ -71,7 +69,7 @@ app.get('/pelatih', (req, res) => {
     });
 });
 
-// Route for displaying trophies
+
 app.get('/trofi', (req, res) => {
     db.query('SELECT * FROM trofi', (err, results) => {
         if (err) return res.status(500).json({ error: 'Database error' });
@@ -79,7 +77,7 @@ app.get('/trofi', (req, res) => {
     });
 });
 
-// Route for adding a trophy
+
 app.post('/trofi/add', (req, res) => {
     const { nama_trofi, musim, jumlah_trofi, pelatih_id } = req.body;
 
@@ -91,12 +89,12 @@ app.post('/trofi/add', (req, res) => {
                 console.error("Error adding trophy:", err);
                 return res.status(500).send('An error occurred while adding the trophy.');
             }
-            res.redirect('/trofi'); // Redirect to trophies page after adding
+            res.redirect('/trofi'); 
         }
     );
 });
 
-// Route for updating a trophy
+
 app.post('/trofi/update/:id', (req, res) => {
     const { nama_trofi, musim, jumlah_trofi, pelatih_id } = req.body;
     const id_trofi = req.params.id;
@@ -109,12 +107,12 @@ app.post('/trofi/update/:id', (req, res) => {
                 console.error("Error updating trophy:", err);
                 return res.status(500).send('An error occurred while updating the trophy.');
             }
-            res.redirect('/trofi'); // Redirect to trophies page after updating
+            res.redirect('/trofi'); 
         }
     );
 });
 
-// Route for deleting a trophy
+
 app.post('/trofi/delete/:id', (req, res) => {
     const id_trofi = req.params.id;
 
@@ -123,11 +121,11 @@ app.post('/trofi/delete/:id', (req, res) => {
             console.error("Error deleting trophy:", err);
             return res.status(500).send('An error occurred while deleting the trophy.');
         }
-        res.redirect('/trofi'); // Redirect to trophies page after deleting
+        res.redirect('/trofi'); 
     });
 });
 
-// Start the server
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
