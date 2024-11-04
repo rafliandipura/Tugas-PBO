@@ -3,14 +3,14 @@ const bcrypt = require('bcryptjs');
 const router = express.Router();
 const db = require('./db');
 
-// Route: Register - Get form
+
 router.get('/register', (req, res) => res.render('register'));
 
-// Route: Register - Post form
+
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
 
-    // Validasi data yang diperlukan
+
     if (!username || !email || !password) {
         return res.send('Please fill all required fields.');
     }
@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Masukkan pengguna baru ke tabel `users`
+        
         db.query(
             'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
             [username, email, hashedPassword],
@@ -36,10 +36,10 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Route: Login - Get form
+
 router.get('/login', (req, res) => res.render('login'));
 
-// Route: Login - Post form
+
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
 
@@ -55,13 +55,12 @@ router.post('/login', (req, res) => {
     });
 });
 
-// Route: Profile - Show user profile and associated data
+
 router.get('/profile', (req, res) => {
     if (!req.session.user) return res.redirect('/login');
 
     const userId = req.session.user.id;
 
-    // Mengambil data terkait pemain, pelatih, statistik, dan trofi
     db.query('SELECT * FROM pemain', (err, pemain) => {
         if (err) return res.status(500).send('An error occurred while fetching player data.');
 
@@ -87,7 +86,6 @@ router.get('/profile', (req, res) => {
     });
 });
 
-// Route: Add player (pemain)
 router.post('/pemain/add', (req, res) => {
     const { nama_pemain, posisi, nomor_punggung, negara, tanggal_lahir, tinggi_cm, berat_kg, bergabung_tahun } = req.body;
 
@@ -104,7 +102,6 @@ router.post('/pemain/add', (req, res) => {
     );
 });
 
-// Route: Add coach (pelatih)
 router.post('/pelatih/add', (req, res) => {
     const { nama_pelatih, posisi, negara, tanggal_lahir, pengalaman_tahun } = req.body;
 
@@ -121,7 +118,6 @@ router.post('/pelatih/add', (req, res) => {
     );
 });
 
-// Route: Add trophy (trofi)
 router.post('/trofi/add', (req, res) => {
     const { nama_trofi, musim, jumlah_trofi, pelatih_id } = req.body;
 
@@ -138,7 +134,6 @@ router.post('/trofi/add', (req, res) => {
     );
 });
 
-// Route: Update player (pemain)
 router.post('/pemain/update/:id', (req, res) => {
     const { nama_pemain, posisi, nomor_punggung, negara, tanggal_lahir, tinggi_cm, berat_kg, bergabung_tahun } = req.body;
     const id_pemain = req.params.id;
@@ -156,7 +151,7 @@ router.post('/pemain/update/:id', (req, res) => {
     );
 });
 
-// Route: Update coach (pelatih)
+
 router.post('/pelatih/update/:id', (req, res) => {
     const { nama_pelatih, posisi, negara, tanggal_lahir, pengalaman_tahun } = req.body;
     const id_pelatih = req.params.id;
@@ -174,7 +169,7 @@ router.post('/pelatih/update/:id', (req, res) => {
     );
 });
 
-// Route: Update trophy (trofi)
+
 router.post('/trofi/update/:id', (req, res) => {
     const { nama_trofi, musim, jumlah_trofi, pelatih_id } = req.body;
     const id_trofi = req.params.id;
@@ -192,7 +187,6 @@ router.post('/trofi/update/:id', (req, res) => {
     );
 });
 
-// Route: Delete player (pemain)
 router.post('/pemain/delete/:id', (req, res) => {
     const id_pemain = req.params.id;
 
@@ -205,7 +199,6 @@ router.post('/pemain/delete/:id', (req, res) => {
     });
 });
 
-// Route: Delete coach (pelatih)
 router.post('/pelatih/delete/:id', (req, res) => {
     const id_pelatih = req.params.id;
 
@@ -218,7 +211,6 @@ router.post('/pelatih/delete/:id', (req, res) => {
     });
 });
 
-// Route: Delete trophy (trofi)
 router.post('/trofi/add', (req, res) => {
     const { nama_trofi, musim, jumlah_trofi, pelatih_id } = req.body;
 
@@ -235,7 +227,6 @@ router.post('/trofi/add', (req, res) => {
     );
 });
 
-// Route: Get all trophies (Read)
 router.get('/trofi', (req, res) => {
     db.query('SELECT * FROM trofi', (err, trophies) => {
         if (err) {
@@ -246,7 +237,6 @@ router.get('/trofi', (req, res) => {
     });
 });
 
-// Route: Get a single trophy by ID (Read)
 router.get('/trofi/:id', (req, res) => {
     const id_trofi = req.params.id;
 
@@ -264,7 +254,6 @@ router.get('/trofi/:id', (req, res) => {
     });
 });
 
-// Route: Update trophy (Update)
 router.post('/trofi/update/:id', (req, res) => {
     const { nama_trofi, musim, jumlah_trofi, pelatih_id } = req.body;
     const id_trofi = req.params.id;
@@ -282,7 +271,6 @@ router.post('/trofi/update/:id', (req, res) => {
     );
 });
 
-// Route: Delete trophy (Delete)
 router.post('/trofi/delete/:id', (req, res) => {
     const id_trofi = req.params.id;
 
@@ -295,7 +283,6 @@ router.post('/trofi/delete/:id', (req, res) => {
     });
 });
 
-// Route: Logout
 router.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
