@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - Pesona Terumbu Karang</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0e6ff;
+            color: #333;
+        }
+        header {
+            background-color: #6a0dad;
+            color: #fff;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #e6ccff;
+        }
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #4a0080;
+            text-align: center;
+        }
+        .contact-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            margin-top: 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .contact-form {
+            flex-basis: 60%;
+            background-color: #e6ccff;
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-left: 10px;       
+            text-align: justify;  
+        }
+        .contact-info {
+            flex-basis: 40%;
+            background-color: #e6ccff;
+            border-radius: 15px;
+            padding: 4rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-left: 20px;       
+            text-align: justify;  
+        }
+        .contact-form h2, .contact-info h2 {
+            margin-top: 0;
+        }
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-form label {
+            margin-bottom: 0.15rem;
+            color: #4a0080;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.15rem;
+            margin-bottom: 1rem;
+            border: 1px solid #9932cc;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 15px;
+        }
+        .contact-form button {
+            background-color: #9932cc;
+            color: #fff;
+            border: none;
+            padding: 0.15rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+        }
+        .contact-form button:hover {
+            background-color: #7b2cbf;
+        }
+        .contact-info p {
+            margin-bottom: 1rem;
+        }
+        .contact-info i {
+            margin-right: 0.5rem;
+            color: #6a0dad;
+        }
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            .contact-form, .contact-info {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="jeniskarang.html">Jenis Karang</a></li>
+                <li><a href="konservasi.html">Konservasi</a></li>
+                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Hubungi Kami</h1>
+        <div class="contact-container">
+            <div class="contact-form">
+                <h2>Kirim Pesan</h2>
+                <form id="contact-form">
+                    <label for="name">Nama:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="subject">Subjek:</label>
+                    <input type="text" id="subject" name="subject" required>
+
+                    <label for="message">Pesan:</label>
+                    <textarea id="message" name="message" required></textarea>
+
+                    <button type="submit">Kirim Pesan</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h2>Informasi Kontak</h2>
+                <p><i>📍</i> Jl. Terumbu Karang No. 123, Kota Bahari, Indonesia</p>
+                <p><i>📞</i> +62 123 4567 8900</p>
+                <p><i>✉️</i> info@pesonaterumbukarang.id</p>
+                <p><i>🕒</i> Senin - Jumat: 09.00 - 17.00 WIB</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            alert(`Terima kasih, ${name}! Pesan Anda telah kami terima.\n\nSubjek: ${subject}\nEmail: ${email}\n\nKami akan segera menghubungi Anda.`);
+            
+            this.reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenis-jenis Terumbu Karang</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0e6ff;
+            color: #333;
+        }
+        header {
+            background-color: #6a0dad;
+            color: #fff;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #e6ccff;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #4a0080;
+            text-align: center;
+        }
+        .coral-types {                   
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        .coral-type {
+            flex: 0 0 calc(45% - 1rem);
+            margin: 0 0 1rem 0;
+            background-color: #e6ccff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            min-height: 300px;         
+        }
+        .coral-type:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .coral-type img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .coral-type h3 {
+            color: #4a0080;
+            margin-bottom: 0.5rem;
+        }
+        .coral-type p {
+            color: #333;
+            font-size: 0.9em;
+        }
+        .info-button {
+            display: inline-block;
+            background-color: #9932cc;
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 20px;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        .info-button:hover {
+            background-color: #7b2cbf;
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 15px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="jeniskarang.html">Jenis Karang</a></li>
+                <li><a href="konservasi.html">Konservasi</a></li>
+                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Jenis-jenis Terumbu Karang</h1>
+        <p>Terumbu karang memiliki beragam jenis dengan bentuk dan karakteristik unik. Mari kita eksplorasi beberapa jenis terumbu karang yang menakjubkan!</p>
+        
+        <div class="coral-types">
+            <div class="coral-type">
+                <img src="karangotak.jpg" alt="Karang Otak">
+                <h3>Karang Otak</h3>
+                <p>Karang ini memiliki bentuk yang menyerupai otak manusia dengan lekukan-lekukan yang khas.</p>
+                <button class="info-button" data-coral="otak">Info Lebih Lanjut</button>
+            </div>
+            <div class="coral-type">
+                <img src="karangmejaa.jpg" alt="Karang Meja">
+                <h3>Karang Meja</h3>
+                <p>Karang meja memiliki bentuk datar yang lebar, menyerupai meja di bawah laut.</p>
+                <button class="info-button" data-coral="meja">Info Lebih Lanjut</button>
+            </div>
+            <div class="coral-type">
+                <img src="karangcabang.jpg" alt="Karang Cabang">
+                <h3>Karang Cabang</h3>
+                <p>Karang ini memiliki struktur bercabang yang indah, menyerupai ranting pohon di bawah laut.</p>
+                <button class="info-button" data-coral="cabang">Info Lebih Lanjut</button>
+            </div>
+            <div class="coral-type">
+                <img src="karanglunak.jpg" alt="Karang Lunak">
+                <h3>Karang Lunak</h3>
+                <p>Berbeda dengan karang keras, karang lunak memiliki tekstur yang lembut dan bergerak dengan arus air.</p>
+                <button class="info-button" data-coral="lunak">Info Lebih Lanjut</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const infoButtons = document.querySelectorAll('.info-button');
+
+        const coralInfo = {
+            otak: {
+                title: "Karang Otak",
+                description: "Karang otak, atau Diploria dan Colpophyllia, adalah jenis karang keras yang terkenal karena bentuknya yang menyerupai otak manusia. Mereka dapat tumbuh sangat besar dan berumur panjang, bahkan mencapai ratusan tahun. Karang otak berperan penting dalam ekosistem terumbu karang, menyediakan tempat berlindung bagi berbagai spesies ikan dan invertebrata laut."
+            },
+            meja: {
+                title: "Karang Meja",
+                description: "Karang meja, atau Acropora, adalah jenis karang yang tumbuh dalam bentuk lembaran lebar dan datar. Mereka dapat mencapai diameter hingga beberapa meter dan sering ditemukan di perairan yang lebih dalam. Karang meja sangat penting dalam membentuk struktur terumbu dan menyediakan naungan bagi organisme lain di bawahnya."
+            },
+            cabang: {
+                title: "Karang Cabang",
+                description: "Karang cabang, seperti jenis Acropora dan Pocillopora, memiliki struktur yang menyerupai ranting pohon. Mereka adalah salah satu jenis karang yang tumbuh paling cepat dan berperan penting dalam pembentukan terumbu. Karang cabang menyediakan habitat yang kompleks bagi berbagai jenis ikan kecil dan invertebrata."
+            },
+            lunak: {
+                title: "Karang Lunak",
+                description: "Karang lunak, seperti Sarcophyton dan Sinularia, tidak memiliki kerangka keras seperti karang keras. Mereka memiliki tekstur yang lembut dan fleksibel, sering bergerak dengan arus air. Karang lunak mengandung senyawa kimia unik yang menjadi subjek penelitian untuk potensi farmasi. Mereka juga berperan dalam meningkatkan keragaman terumbu karang."
+            }
+        };
+
+        infoButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const coralType = this.getAttribute('data-coral');
+                modalTitle.textContent = coralInfo[coralType].title;
+                modalDescription.textContent = coralInfo[coralType].description;
+                modal.style.display = 'block';
+            });
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

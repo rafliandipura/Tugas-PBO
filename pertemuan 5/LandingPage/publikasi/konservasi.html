@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konservasi Terumbu Karang</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+            background-color: #f0e6ff;
+            color: #333;
+        }
+        header {
+            background-color: #6a0dad;
+            color: #fff;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #e6ccff;
+        }
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #4a0080;
+            text-align: center;
+        }
+        .conservation-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .conservation-methods {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        .method-card {
+            flex: 1;
+            margin: 0 1rem;
+            background-color: #e6ccff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .method-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        .cta-button {
+            display: block;
+            width: 200px;
+            margin: 2rem auto;
+            background-color: #9932cc;
+            color: #fff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .cta-button:hover {
+            background-color: #7b2cbf;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        #donation-form {
+            background-color: #e6ccff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);            
+        }        
+        #donation-form h2 {
+            margin-top: 0;
+        }
+        #donation-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4a0080;
+        }
+        #donation-form input[type="text"],
+        #donation-form input[type="email"],
+        #donation-form input[type="number"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #9932cc;
+            border-radius: 5px;
+        }
+        #donation-form input[type="submit"] {
+            background-color: #9932cc;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-block;           
+        }
+        #donation-form input[type="submit"]:hover {
+            background-color: #7b2cbf;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="jeniskarang.html">Jenis Karang</a></li>
+                <li><a href="konservasi.html">Konservasi</a></li>
+                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Konservasi Terumbu Karang</h1>
+        <img src="konservasi.jpg" alt="Kegiatan konservasi terumbu karang" class="conservation-image">
+        <p>Terumbu karang adalah ekosistem yang sangat penting namun rentan. Mereka menghadapi ancaman serius dari perubahan iklim, polusi, dan aktivitas manusia yang tidak bertanggung jawab. Namun, dengan upaya konservasi yang tepat, kita dapat membantu melindungi dan memulihkan terumbu karang ini.</p>
+        
+        <h2>Metode Konservasi</h2>
+        <div class="conservation-methods">
+            <div class="method-card">
+                <img src="transpplantasikarang.jpg" alt="Transplantasi karang">
+                <h3>Transplantasi Karang</h3>
+                <p>Menanam fragmen karang yang sehat di area terumbu yang rusak untuk membantu pemulihan.</p>
+            </div>
+            <div class="method-card">
+                <img src="pembersihanpantai.jpg" alt="Pembersihan pantai">
+                <h3>Pembersihan Pantai</h3>
+                <p>Mengurangi polusi laut dengan membersihkan sampah di pantai dan perairan sekitar terumbu.</p>
+            </div>
+            <div class="method-card">
+                <img src="edukasi.jpg" alt="Edukasi masyarakat">
+                <h3>Edukasi Masyarakat</h3>
+                <p>Meningkatkan kesadaran tentang pentingnya terumbu karang dan cara melestarikannya.</p>
+            </div>
+        </div>
+
+        <a href="#donation-form" class="cta-button">Dukung Konservasi Sekarang</a>
+
+        <form id="donation-form">
+            <h2>Formulir Donasi</h2>
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="amount">Jumlah Donasi (IDR):</label>
+            <input type="number" id="amount" name="amount" min="10000" step="10000" required>
+
+            <input type="submit" value="Kirim Donasi">
+        </form>
+    </main>
+
+    <script>
+        document.getElementById('donation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const amount = document.getElementById('amount').value;
+            alert(`Terima kasih, ${name}! Donasi Anda sebesar Rp${amount} telah kami terima. Ini akan sangat membantu upaya konservasi terumbu karang.`);
+            this.reset();
+        });
+
+        document.querySelectorAll('.method-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const method = this.querySelector('h3').textContent;
+                alert(`${method} adalah metode penting dalam konservasi terumbu karang. Mari kita dukung bersama!`);
+            });
+        });
+    </script>
+</body>
+</html>
