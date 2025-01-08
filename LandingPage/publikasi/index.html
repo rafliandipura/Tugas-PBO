@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesona Terumbu Karang</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+            background-color: #f0e6ff;
+            color: #333;
+        }
+        header {
+            background-color: #6a0dad;
+            color: #fff;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #e6ccff;
+        }
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #4a0080;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 1rem;
+        }
+        .coral-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .coral-image:hover {
+            transform: scale(1.02);
+        }
+        p {
+            text-align: justify;
+            color: #4a0080;
+        }
+        .cta-button {
+            display: block;
+            width: 200px;
+            margin: 2rem auto;
+            background-color: #9932cc;
+            color: #fff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .cta-button:hover {
+            background-color: #7b2cbf;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        .coral-types {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .coral-type {
+            background-color: #e6ccff;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        .coral-type:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .coral-type img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="jeniskarang.html">Jenis Karang</a></li>
+                <li><a href="konservasi.html">Konservasi</a></li>
+                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Pesona Terumbu Karang</h1>
+        <img src="terumbukarangwallpaper.jpg" alt="Terumbu karang yang indah" class="coral-image">
+        <p>Selamat datang di dunia menakjubkan terumbu karang! Terumbu karang adalah ekosistem yang luar biasa, penuh warna, dan kaya akan kehidupan. Mereka bukan hanya indah dipandang, tetapi juga memiliki peran penting dalam menjaga keseimbangan ekosistem laut.</p>
+        <p>Mari kita jelajahi keajaiban terumbu karang, pelajari berbagai jenisnya, dan ketahui bagaimana kita dapat melindungi habitat berharga ini untuk generasi mendatang.</p>
+        <a href="#jenis-karang" class="cta-button">Jelajahi Terumbu Karang</a>
+        
+        <div class="coral-types" id="jenis-karang">
+            <div class="coral-type">
+                <img src="karangotak.jpg" alt="Karang Otak">
+                <h3>Karang Otak</h3>
+            </div>
+            <div class="coral-type">
+                <img src="karangmejaa.jpg" alt="Karang Meja">
+                <h3>Karang Meja</h3>
+            </div>
+            <div class="coral-type">
+                <img src="karangcabang.jpg"Karang Cabang">
+                <h3>Karang Cabang</h3>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#jenis-karang').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.querySelectorAll('.coral-type').forEach(function(type) {
+            type.addEventListener('click', function() {
+                var coralType = this.querySelector('h3').textContent;
+                alert('Anda telah memilih ' + coralType + '. Mari kita pelajari lebih lanjut tentang jenis karang ini!' );
+                window.location.href = 'jeniskarang.html';
+            });
+        });
+    </script>
+</body>
+</html>

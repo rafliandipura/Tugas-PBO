@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Terumbu Karang</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0e6ff;
+            color: #333;
+        }
+        header {
+            background-color: #6a0dad;
+            color: #fff;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #e6ccff;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #4a0080;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(106, 13, 173, 0.7);
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            transition: .5s ease;
+        }
+        .gallery-item:hover .overlay {
+            height: 100%;
+        }
+        .gallery-item .text {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+        @media only screen and (max-width: 700px){
+            .modal-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="jeniskarang.html">Jenis Karang</a></li>
+                <li><a href="konservasi.html">Konservasi</a></li>
+                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Galeri Terumbu Karang</h1>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="terumbukarangwallpaper.jpg" alt="Terumbu Karang 1">
+                <div class="overlay">
+                    <div class="text">Terumbu Karang di Perairan Dangkal</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="karangotak.jpg" alt="Terumbu Karang 2">
+                <div class="overlay">
+                    <div class="text">Karang Otak di Taman Nasional Bunaken</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="ikantropis.jpg" alt="Terumbu Karang 3">
+                <div class="overlay">
+                    <div class="text">Ikan-ikan Tropis di Antara Terumbu Karang</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="karanglunak.jpg" alt="Terumbu Karang 4">
+                <div class="overlay">
+                    <div class="text">Karang Lunak yang Bergoyang</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="karangmejaa.jpg" alt="Terumbu Karang 5">
+                <div class="overlay">
+                    <div class="text">Terumbu Karang di Raja Ampat</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="penyu.jpg" alt="Terumbu Karang 6">
+                <div class="overlay">
+                    <div class="text">Penyu Berenang di Atas Terumbu Karang</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="terumbukarangwallpaper.jpg" alt="Terumbu Karang 7">
+                <div class="overlay">
+                    <div class="text">Terumbu Karang yang Sehat di Wakatobi</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="ikantropis.jpg" alt="Terumbu Karang 8">
+                <div class="overlay">
+                    <div class="text">Anemon Laut dan Ikan Badut</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("modal");
+        const modalImg = document.getElementById("img01");
+        const captionText = document.getElementById("caption");
+        const closeBtn = document.getElementsByClassName("close")[0];
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.onclick = function(){
+                modal.style.display = "block";
+                modalImg.src = this.querySelector('img').src;
+                captionText.innerHTML = this.querySelector('.text').innerHTML;
+            }
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
