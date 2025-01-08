@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Node JS - MySQL</title>
+    <style>
+        /* Existing CSS remains unchanged */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fce4ec;
+            margin: 0;
+            padding: 20px;
+            color: #880e4f;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(236, 64, 122, 0.1);
+        }
+        h1, h2 {
+            color: #c2185b;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #f48fb1;
+        }
+        th {
+            background-color: #ec407a;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #fce4ec;
+        }
+        a {
+            color: #d81b60;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        form {
+            background-color: #f8bbd0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        label {
+            width: 100px;
+            margin-right: 10px;
+        }
+        input[type="text"],
+        input[type="email"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #f48fb1;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ec407a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #d81b60;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        .edit-btn, .delete-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: white;
+        }
+        .edit-btn {
+            background-color: #f06292;
+        }
+        .edit-btn:hover {
+            background-color: #ec407a;
+        }
+        .delete-btn {
+            background-color: #ff80ab;
+        }
+        .delete-btn:hover {
+            background-color: #f50057;
+        }
+    </style>
+    <script>
+        function confirmDelete(id) {
+            return confirm("Apakah anda yakin ingin menghapus data ini?");
+        }
+
+        function confirmEdit(id) {
+            return confirm("Apakah anda yakin ingin mengedit data ini?");
+        }
+
+        function confirmAdd() {
+            return confirm("Apakah anda yakin ingin menambahkan data baru?");
+        }
+        
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Tambah Pengguna Baru</h1>
+        <form action="/add" method="post" onsubmit="return confirmAdd()">
+            <div class="form-group">
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" name="phone" id="phone">
+            </div>
+            <button type="submit">Tambah</button>
+        </form>
+
+        <h2>Daftar User/Pengguna</h2>
+        <table>
+            <tr> 
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Telepon</th>
+                <th>Aksi</th>
+            </tr>
+             <% users.forEach(pengguna => { %>
+            <tr>
+                <td><%= pengguna.id %></td>
+                <td><%= pengguna.nama %></td>
+                <td><%= pengguna.email %></td>
+                <td><%= pengguna.phone %></td>
+                <td class="action-buttons">
+                    <a href="/edit/<%= pengguna.id %>" class="edit-btn" onclick="return confirmEdit(<%= pengguna.id %>)">Edit</a>
+                    <a href="/delete/<%= pengguna.id %>" class="delete-btn" onclick="return confirmDelete(<%= pengguna.id %>)">Hapus</a>
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+    </div>
+</body>
+</html>

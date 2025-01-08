@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Data Pengguna</title>
+    <style>
+        body {
+            background-color: #fce4ec;
+            font-family: Arial, sans-serif;
+            color: #880e4f;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #f48fb1;
+            box-shadow: 0 0 10px rgba(236, 64, 122, 0.1);
+            border-radius: 8px;
+        }
+        
+        h2 {
+            color: #d81b60;
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #c2185b;
+        }
+        
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #f06292;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button[type="submit"] {
+            background-color: #ec407a;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #d81b60;
+        }
+    </style>
+    <script>
+        function saveChanges() {
+            alert("Anda akan menyimpan perubahan data.");
+            return confirm("Apakah anda yakin ingin mengedit data ini?");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Data Pengguna</h2>
+        <form action="/update/<%= users.id %>" method="post" onsubmit="return saveChanges()">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required value="<%=users.nama %>">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="<%=users.email %>">
+            <label for="phone">Telepon:</label>
+            <input type="text" name="phone" id="phone" value="<%=users.phone %>">
+            <button type="submit">Simpan</button>
+        </form>
+    </div>
+</body>
+</html>
